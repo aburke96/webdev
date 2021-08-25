@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        form {
+            border-style: inset;
+        }
+        
+        body {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="myform">
+        This form is initially empty, but we will put inside it new input fields!<br>
+        <input type="text" id="txt1"><br>
+
+    </form>
+    <br>
+    <button onclick="addfield()">Add a field to the above!</button>
+    <button onclick="addradio()">Add radio buttons!</button>
+    <button onclick="addheading()">Create new heading!</button>
+    <button onclick="">Remake form!</button>
+
+    <script>
+        // This function will add a new text input field to the above
+        count = 0;
+        rcount = 0;
+
+        function addfield() {
+            count++;
+            var mytext = document.createElement("input");
+            var mybreak = document.createElement("br");
+            mytext.setAttribute("type", "text");
+            mytext.setAttribute("value", "text field: " + count);
+            document.getElementById('myform').appendChild(mytext);
+            document.getElementById('myform').appendChild(mybreak);
+        }
+
+        function addradio() {
+            rcount++;
+            var mytext = document.createElement("input");
+            mytext.setAttribute("id", "radio" + rcount);
+            var mylabel = document.createElement("label");
+            mylabel.innerHTML = "radio: " + rcount
+            var mybreak = document.createElement("br");
+            mytext.setAttribute("type", "radio");
+            mytext.setAttribute("value", "radio: " + rcount);
+            mytext.setAttribute("name", "testRadio");
+            document.getElementById('myform').appendChild(mytext);
+            document.getElementById('myform').appendChild(mylabel);
+            document.getElementById('myform').appendChild(mybreak);
+        }
+
+        function addheading() {
+            var input = ""
+            if (document.getElementById("current contents") != null) {
+                document.getElementById("current contents").remove();
+            }
+            var h1 = document.createElement("h1");
+            h1.setAttribute("id", "current contents");
+            var t = document.getElementById('myform').children;
+            t.forEach(li => {
+                if (li.innerText != "" && li.innerText == undefined) {
+                    console.log(li);
+
+                }
+                if (li.innerText != "" && li.innerText != undefined) {
+
+                    //console.log("--------");
+                    //console.log(li.innerText);
+                    //console.log();
+                    input += li.innerText + " "
+                }
+            });
+
+            h1.innerHTML = input
+            document.getElementById("myform").appendChild(h1);
+
+            var t = document.getElementById("myform").children;
+            var input = "";
+            for (var i = 0; i < t.length; i++) {
+                input = input + t[i].tagName + "<br>";
+                console.dir(t[i])
+                if (t[i].tagName == "INPUT") {
+                    input = input + t[i].value + "<br>";
+                    console.dir(t[i].value)
+                }
+            }
+
+        }
+
+        function getText(node) {
+
+            if (node.nodeType === 3) {
+                return node.data;
+            }
+
+            var txt = '';
+
+            if (node = node.firstChild)
+                do {
+                    txt += getText(node);
+                } while (node = node.nextSibling);
+
+            return txt;
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .column {
+            float: left;
+            width: 33%;
+        }
+        
+        body {
+            background-color: lightgreen;
+            font-size: 12px;
+        }
+        
+        #myform {
+            border-style: inset;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>On this webpage we will practice utilizing mouse events</h3>
+    <form id="myform">
+        This field should change color as we enter and leave: <input type="text" id="txt1" value="Some sample text"><br> X-Coord: <input type="number" id="num1"><br> Y-Coord: <input type="number" id="num2">
+    </form>
+    <div class="column">
+        <img id="img1" width="400px" height="400px" src="https://webcdn.triongames.com/archeage/blogs/dragonraising/legends-return-dragons.gif"><br>
+        <img id="img2" width="400px" height="400px" src="https://www.realmofhistory.com/wp-content/uploads/2018/03/10-mythical-dragon-entities-facts_11.jpg">
+    </div>
+    <div class="column">
+        <img id="graph" src="https://graphsketch.com/images/blank.png">
+    </div>
+
+    <script>
+        var img2size = 400
+        var txt1color = "white"
+        var img1 = "https://webcdn.triongames.com/archeage/blogs/dragonraising/legends-return-dragons.gif"
+        var img2 = "https://www.realmofhistory.com/wp-content/uploads/2018/03/10-mythical-dragon-entities-facts_11.jpg"
+
+        document.getElementById("img1").addEventListener("mouseover", (event) => {
+            var swap = document.getElementById("img2").src
+            document.getElementById("img1").src = swap
+            console.log("mouseover")
+        });
+
+        document.getElementById("img2").addEventListener("mouseover", (event) => {
+            img2size = img2size + img2size / 2
+            document.getElementById("img2").style.width = img2size + "px"
+            document.getElementById("img2").style.height = img2size + "px"
+        });
+
+        document.getElementById("txt1").addEventListener("mouseenter", (event) => {
+            document.getElementById("txt1").style.background = "lightblue"
+        });
+        document.getElementById("txt1").addEventListener("mouseleave", (event) => {
+            document.getElementById("txt1").style.background = "orange"
+        });
+        document.getElementById("graph").addEventListener("mousemove", (event) => {
+            var x = event.clientX
+            var y = event.clientY
+            document.getElementById("num1").value = x
+            document.getElementById("num2").value = y
+
+        });
+        document.getElementById("myform").addEventListener("mouseleave", (event) => {
+            var n1 = document.getElementById("num1").value
+            var n2 = document.getElementById("num2").value
+            var t1 = document.getElementById("txt1").value
+            document.getElementById("img2").src = img2
+            document.getElementById("img2").style.width = 400 + "px"
+            document.getElementById("img2").style.height = 400 + "px"
+            var msg = t1 + " " + n1 + " " + n2
+            alert(msg)
+        });
+    </script>
+</body>
+
+</html>

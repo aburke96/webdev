@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+        
+        .result {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>In this practice we will be implementing a variety of input checkers!</h3>
+    <p>The method headers and descriptions of what they should do are provided</p>
+    <input type="text" id="mydata"><br>
+    <button onclick="find_num()">Check num!</button>
+    <button onclick="find_whitespace()">Check whitespace!</button>
+    <button onclick="replace_r()">Replace r!</button>
+    <button onclick="count_r()">Count r!</button>
+    <button onclick="replace_fox()">Replace fox!</button>
+    <button onclick="pass_verify()">Password verify!</button>
+    <p class="result" id="p1">empty</p>
+    <p class="result" id="p2">empty</p>
+    <p class="result" id="p3">empty</p>
+    <p class="result" id="p4">empty</p>
+    <p class="result" id="p5">empty</p>
+    <p class="result" id="p6">empty</p>
+
+    <script>
+        const regexnum = new RegExp('\\d');
+        const regexwhite = new RegExp('\\s');
+        const regexr = new RegExp(/r/g)
+        const regexrS = new RegExp(/r/g)
+
+
+        // For this we aren't concerned with the total count of digits, only if there is at least one digit inside the String
+        function find_num() {
+            var num = document.getElementById("mydata").value
+            document.getElementById("p1").innerHTML = regexnum.test(num)
+            console.log(regexnum.test(num));
+
+        }
+
+        // Reminder that whitespace means more than just a single space character, we want to count up instances of tabs and newlines as well
+        function find_whitespace() {
+            var num = document.getElementById("mydata").value
+            document.getElementById("p2").innerHTML = regexwhite.test(num)
+            console.log(regexwhite.test(num));
+        }
+
+        // You'll need to use the string.replace(regex, replacement) method here.
+        // Reminder that your regex needs to contain the global modifier if you want to do a replace all in a single call
+        function replace_r() {
+            var n = document.getElementById("mydata").value
+            console.log(n)
+            n = n.replace(new RegExp(/r/g), "R")
+            document.getElementById("p3").innerHTML = n
+            console.log(n)
+            document.getElementById("mydata").value = n
+        }
+
+        // Here we'll want to use the loop structure present in examples regexp2-4
+        // while(reg.test(string)){...}
+        // Maintain a counter as we iterate through that loop
+        function count_r() {
+            var n = document.getElementById("mydata").value
+            var count = 0
+            while (regexrS.test(n)) {
+                count++;
+            }
+            document.getElementById("p4").innerHTML = count
+            console.log(count)
+        }
+
+        // Just as the above, will need to make the regex global. Remember to add the case insensitive modifier
+        function replace_fox() {
+            var n = document.getElementById("mydata").value
+            console.log(n)
+            n = n.replace(new RegExp(/fox/ig), "bear")
+            console.log(n)
+            document.getElementById("mydata").value = n
+            document.getElementById("p5").innerHTML = n
+        }
+
+        // HINT: the full regex for all three conditions can be large, potentially break it into multiple regex checks instead of one large equation
+        function pass_verify() {
+            var n = document.getElementById("mydata").value
+            const regexupper = new RegExp(/[a-z]/)
+            const regexlower = new RegExp(/[A-Z]/)
+            if (regexupper.test(n) && regexlower.test(n) && regexnum.test(n) && n.length >= 8) {
+                document.getElementById("p6").innerHTML = "true"
+                console.log("valid")
+            } else {
+                document.getElementById("p6").innerHTML = "false"
+                console.log("invalid")
+            }
+        }
+    </script>
+</body>
+
+</html>

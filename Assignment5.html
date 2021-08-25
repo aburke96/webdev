@@ -1,0 +1,82 @@
+<!-- Assignment-5 – COSC 2328 – Professor McCurry -->
+<!-- Implemented by - Alexandra Burke  -->
+
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        background-color: slategray;
+        color: black;
+    }
+</style>
+
+<body>
+
+    <form action="welcome4.php" method="post">
+        Number: <input id="num1" type="number" min="1" max="100" name="num1"><br> Number: <input id="num2" type="number" min="1" max="100" name="num2"><br>
+        <br>
+        <select id="op" name="operation" size="5">
+            <option value="+">add</option>
+            <option value="-">subtract</option>
+            <option value="*">multiply</option>
+            <option value="/">divide</option>
+            <option value="%">modulus</option>
+
+        </select>
+        <br>
+        <button id="solve" type="button">solve</button>
+    </form>
+    <p id="p2"></p>
+
+    <hr>
+    <p id="p1"></p>
+
+    username: <input id="username" type="text"><br> email: <input id="email" type="text"><br>
+
+    <button id="register" type="button">register</button>
+    <hr> Answer text color: <input id="cc" type="color" name="col"><br>
+    <button id="color" type="button">change color</button>
+
+
+</body>
+<script>
+    document.getElementById("register").addEventListener("click", function() {
+
+        var email = document.getElementById('email').value
+        var username = document.getElementById('username').value
+        var output = "Welcome " + username + "! You are registered at " + email + "<br>";
+        document.getElementById("p1").innerHTML = output
+
+    });
+    document.getElementById("solve").addEventListener("click", function() {
+        var num1 = parseInt(document.getElementById('num1').value)
+        var num2 = parseInt(document.getElementById('num2').value)
+        var op = document.getElementById('op').value
+        var output = " "
+        if (op == "+") {
+            var result = num1 + num2
+            output = output + result
+        } else if (op == "-") {
+            var result = num1 - num2
+            output = output + result
+        } else if (op == "*") {
+            var result = num1 * num2
+            output = output + result
+        } else if (op == "/") {
+            var result = num1 / num2
+            output = output + result
+        } else if (op == "%") {
+            var result = num1 % num2
+            output = output + result
+        }
+        document.getElementById("p2").innerHTML = output
+
+    });
+    document.getElementById("color").addEventListener("click", function() {
+        var color = document.getElementById("cc").value
+        document.getElementById("p1").style.color = color;
+        document.getElementById("p2").style.color = color;
+    });
+</script>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--
+
+Team 1: Arman, Kamil, Alexandra, John, James
+
+    -->
+    <title>In Class Assignment 9</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // part 1: load content from file to web page
+        $(document).ready(function() {
+            $("#p1").load("http://alexandraburke.tech/ajax_info.txt");
+        });
+
+        // part 2: call random_op.php and prepend result to p2
+        $(document).ready(function() {
+            $("#prepend").click(function() {
+                $.get("random_op.php", function(data) {
+                    $("#p2").prepend(data);
+                });
+            });
+        });
+
+        // part 3: use post to send over age, name, and job
+        $(document).ready(function() {
+            $("#submit").click(function() {
+                let inputAge = $("#age").val();
+                let inputName = $("#name").val();
+                let inputJob = $("#job").val();
+                $.post("AJAXinclass.php", {
+                        age: inputAge,
+                        name: inputName,
+                        job: inputJob
+                    },
+                    function(data) {
+                        $("#p3").append(data);
+                    });
+            });
+        });
+    </script>
+</head>
+<style>
+    body {
+        background-color: rgb(240, 234, 214);
+    }
+</style>
+
+<body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <button id="prepend">Prepend Content</button>
+    <p>Age:</p>
+    <input type="number" id="age">
+    <p>Name:</p>
+    <input type="text" id="name">
+    <p>Job:</p>
+    <input type="text" id="job"><br>
+    <button id="submit">Submit</button>
+    <p id="p3"></p>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .column {
+            float: left;
+            width: 33%;
+        }
+        
+        body {
+            background-color: lightgreen;
+            font-size: 12px;
+        }
+        
+        #myform {
+            border-style: inset;
+            max-width: 400px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h3>On this webpage we will practice utilizing mouse events</h3>
+    <form id="myform">
+        This field should change color as we enter and leave: <input type="text" id="txt1" value="Some sample text"><br> X-Coord: <input type="number" id="num1"><br> Y-Coord: <input type="number" id="num2">
+    </form>
+    <div class="column">
+        <img id="img1" width="400px" height="400px" src="https://webcdn.triongames.com/archeage/blogs/dragonraising/legends-return-dragons.gif"><br>
+        <img id="img2" width="400px" height="400px" src="https://www.realmofhistory.com/wp-content/uploads/2018/03/10-mythical-dragon-entities-facts_11.jpg">
+    </div>
+    <div class="column">
+        <img id="graph" src="https://graphsketch.com/images/blank.png">
+    </div>
+
+    <script>
+        var img2size = 400
+        var txt1color = "white"
+        var img1 = "https://webcdn.triongames.com/archeage/blogs/dragonraising/legends-return-dragons.gif"
+        var img2 = "https://www.realmofhistory.com/wp-content/uploads/2018/03/10-mythical-dragon-entities-facts_11.jpg"
+        $("#img1").mouseover(function() {
+            var swap = $("#img2").attr("src")
+            $("#img1").attr("src", swap)
+            console.log("mouseover")
+            console.log("click img1")
+        });
+
+
+        $("#img2").mouseover(function() {
+            img2size = img2size + img2size / 2
+            $("#img2").css("width", img2size + "px")
+            $("#img2").css("height", img2size + "px")
+        });
+
+        $("#txt1").mouseenter(function() {
+            $("#txt1").css("background-color", "lightblue")
+        });
+        $("#txt1").mouseleave(function() {
+            $("#txt1").css("background-color", "orange")
+        });
+        $("#graph").mousemove(function() {
+            var x = event.clientX
+            var y = event.clientY
+            $("#num1").val(x)
+            $("#num2").val(y)
+
+        });
+        $("#myform").mouseleave(function() {
+            var n1 = $("#num1").val()
+            var n2 = $("#num2").val()
+            var t1 = $("#txt1").val()
+            $("#img2").attr("src", img2)
+            $("#img2").css("width", 400 + "px")
+            $("#img2").css("height", 400 + "px")
+            var msg = t1 + " " + n1 + " " + n2
+            alert(msg)
+        });
+    </script>
+</body>
+
+</html>
