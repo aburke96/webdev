@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .column {
+            float: left;
+            width: 33%;
+        }
+        
+        body {
+            background-color: lightblue;
+            font-size: 12px;
+        }
+        
+        #myform {
+            border-style: inset;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <title>Madlibs</title>
+    <h1>Madlibs Story!</h1>
+
+    <label for="story">Choose a story:</label>
+
+    <select name="story" id="sel">
+      <option value="A">Story 1</option>
+      <option value="B">Story 2</option>
+      <option value="C">Story 3</option>
+    
+    </select>
+
+    <p id="text"></p>
+    <hr>
+    <div>
+        <p>
+            Verb: <input id="verb" size=40 name=5>
+        </p>
+        Name: <input id="name" size=40 name=1>
+        <p>
+            Verb (past tense): <input id="verb2" size=40 name=3>
+        </p>
+        Noun:<input id="noun" size=40 name=11>
+        <p>
+            Noun (plural): <input id="noun2" size=40 name=9>
+        </p>
+        Adjective: <input id="adj" size=40 name=7>
+
+
+
+
+        <button onclick="theClick()">Make Madlib</button>
+    </div>
+
+</body>
+<script>
+    function theClick() {
+
+        var select = document.getElementById("sel").value
+        console.log(select)
+        var verb = document.getElementById("verb").value
+        var name = document.getElementById("name").value
+        var verb2 = document.getElementById("verb2").value
+        var noun = document.getElementById("noun").value
+        var noun2 = document.getElementById("noun2").value
+        var adj = document.getElementById("adj").value
+
+        if (select == "A") {
+            document.getElementById("text").innerHTML = storyA(verb, name, verb2, noun, noun2, adj)
+        }
+        if (select == "B") {
+            document.getElementById("text").innerHTML = storyB(verb, name, verb2, noun, noun2, adj)
+        }
+        if (select == "C") {
+            document.getElementById("text").innerHTML = storyC(verb, name, verb2, noun, noun2, adj)
+        }
+
+    }
+
+    function storyA(verb, name, verb2, noun, noun2, adj) {
+        return `
+        Once upon a time there was a ruler named ${name} who loved to ${verb}. 
+        The ruler had a favorite thing it was a ${noun}. In the Kingdom, many
+        ${adj} ${noun2} were alive and hated to ${verb2}.
+        `
+    }
+
+    function storyB(verb, name, verb2, noun, noun2, adj) {
+        return `
+        In the year 3020 an extraterrestrial creature named ${name} with a pet ${noun}. 
+        The creature would ${verb} with ${noun2} in space. There were ${adj} spaceships
+        that ${verb2} all around the galaxy. 
+        `
+    }
+
+    function storyC(verb, name, verb2, noun, noun2, adj) {
+        return `
+        ${name} was a ghost. The ghost was ${adj} and would always ${verb} with its ghost 
+        friends. Together they ${verb2} with a ${noun} to scare people. However, this 
+        ghost was scared of ${noun2}.
+
+        `
+    }
+</script>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .column {
+            float: left;
+            width: 33%;
+        }
+        
+        body {
+            background-color: lightblue;
+            font-size: 12px;
+        }
+        
+        #myform {
+            border-style: inset;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <title>Assignment 8</title>
+    <h1>Madlibs Story!</h1>
+
+    <p id="text"></p>
+    <hr>
+    <div>
+        <p>
+            Verb: <input id="verb" size=40 name=5>
+        </p>
+        Name: <input id="name" size=40 name=1>
+        <p>
+            Verb (past tense): <input id="verb2" size=40 name=3>
+        </p>
+        Noun:<input id="noun" size=40 name=11>
+        <p>
+            Noun (plural): <input id="noun2" size=40 name=9>
+        </p>
+        Adjective: <input id="adj" size=40 name=7>
+
+
+
+
+        <button onclick="theClick()">Make Madlib</button>
+    </div>
+
+</body>
+<script>
+    function theClick() {
+
+        var verb = document.getElementById("verb").value
+        var name = document.getElementById("name").value
+        var verb2 = document.getElementById("verb2").value
+        var noun = document.getElementById("noun").value
+        var noun2 = document.getElementById("noun2").value
+        var adj = document.getElementById("adj").value
+
+        document.getElementById("text").innerHTML = storyA(verb, name, verb2, noun, noun2, adj)
+
+
+    }
+
+    function storyA(verb, name, verb2, noun, noun2, adj) {
+        return `
+        Once upon a time there was a ruler named ${name} who loved to ${verb}. 
+        The ruler had a favorite thing it was a ${noun}. In the Kingdom, many
+        ${adj} ${noun2} were alive and hated to ${verb2}.
+        `
+    }
+</script>
+
+</html>
