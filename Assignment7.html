@@ -1,0 +1,154 @@
+<!-- Assignment-5 – COSC 2328 – Professor McCurry -->
+<!-- Implemented by - Alexandra Burke  -->
+
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        background-color: slategray;
+        color: black;
+    }
+</style>
+
+<body>
+    <table>
+
+        <tr>
+            <td><img id="1" onclick="clicksquare(1)" onmouseenter="squareenter(1)" onmouseleave="squareleave(1)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+            <td><img id="2" onclick="clicksquare(2)" onmouseenter="squareenter(2)" onmouseleave="squareleave(2)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+            <td><img id="3" onclick="clicksquare(3)" onmouseenter="squareenter(3)" onmouseleave="squareleave(3)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+        </tr>
+        <tr>
+            <td><img id="4" onclick="clicksquare(4)" onmouseenter="squareenter(4)" onmouseleave="squareleave(4)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+            <td><img id="5" onclick="clicksquare(5)" onmouseenter="squareenter(5)" onmouseleave="squareleave(5)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+            <td><img id="6" onclick="clicksquare(6)" onmouseenter="squareenter(6)" onmouseleave="squareleave(6)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+        </tr>
+        <tr>
+            <td><img id="7" onclick="clicksquare(7)" onmouseenter="squareenter(7)" onmouseleave="squareleave(7)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+            <td><img id="8" onclick="clicksquare(8)" onmouseenter="squareenter(8)" onmouseleave="squareleave(8)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+            <td><img id="9" onclick="clicksquare(9)" onmouseenter="squareenter(9)" onmouseleave="squareleave(9)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png" height="150px" width="150px"></td>
+        </tr>
+
+    </table>
+
+    <p id="message"></p>
+    <p id="Xwins"></p>
+    <p id="Owins"></p>
+    <p id="draw"></p>
+    <p><button id="btn" onclick="newGame()">new game</button></p>
+
+</body>
+<script>
+    var ximg = "https://qph.fs.quoracdn.net/main-qimg-a34b8f13bc64c20f17c83462d25e1e2c.webp"
+    var oimg = "http://pngimg.com/uploads/letter_o/letter_o_PNG89.png"
+    var blankimg = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Square_1.svg/1200px-Square_1.svg.png"
+
+    var state = 0
+    var arrX = []
+    var arrO = []
+    var Xwins = 0
+    var Owins = 0
+    var draw = 0
+
+    document.getElementById("Xwins").innerHTML = "X wins = " + Xwins
+    document.getElementById("Owins").innerHTML = "O wins = " + Owins
+    document.getElementById("draw").innerHTML = "Draw = " + draw
+
+    function clicksquare(x) {
+        console.log(x)
+        if (arrX.includes(x) || arrO.includes(x))
+            return
+        if (state == 0) {
+            document.getElementById(x).src = ximg
+            state = 1
+            arrX.push(x)
+        } else {
+            document.getElementById(x).src = oimg
+            state = 0
+            arrO.push(x)
+        }
+        if (check(arrX)) {
+            console.log("X wins")
+            document.getElementById("message").innerHTML = "Player X is the winner"
+            Xwins += 1
+        }
+        if (check(arrO)) {
+            console.log("O wins")
+            document.getElementById("message").innerHTML = "Player O is the winner"
+            Owins += 1
+        }
+
+        var L = arrO.length + arrX.length
+        if (L == 9) {
+            document.getElementById("message").innerHTML = "The match is a draw!"
+            draw += 1
+        }
+        document.getElementById("Xwins").innerHTML = "X wins = " + Xwins
+        document.getElementById("Owins").innerHTML = "O wins = " + Owins
+        document.getElementById("draw").innerHTML = "Draw = " + draw
+    }
+
+    function check(arr) {
+        if (arr.includes(1) && arr.includes(2) && arr.includes(3)) {
+            return true
+        }
+        if (arr.includes(4) && arr.includes(5) && arr.includes(6)) {
+            return true
+        }
+        if (arr.includes(7) && arr.includes(8) && arr.includes(9)) {
+            return true
+        }
+        if (arr.includes(1) && arr.includes(4) && arr.includes(7)) {
+            return true
+        }
+        if (arr.includes(2) && arr.includes(5) && arr.includes(8)) {
+            return true
+        }
+        if (arr.includes(3) && arr.includes(6) && arr.includes(9)) {
+            return true
+        }
+        if (arr.includes(1) && arr.includes(5) && arr.includes(9)) {
+            return true
+        }
+        if (arr.includes(3) && arr.includes(5) && arr.includes(7)) {
+            return true
+        }
+        return false
+
+    }
+
+    function newGame() {
+        state = 0
+        arrX = []
+        arrO = []
+        for (var i = 1; i < 10; i++) {
+            document.getElementById(i).src = blankimg
+        }
+        document.getElementById("message").innerHTML = " "
+    }
+    var selectimg = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/1200px-Five-pointed_star.svg.png"
+
+    function squareenter(x) {
+        document.getElementById(x).src = selectimg
+    }
+
+    function squareleave(x) {
+
+        if (arrX.includes(x)) {
+            document.getElementById(x).src = ximg
+        } else if (arrO.includes(x)) {
+            document.getElementById(x).src = oimg
+        } else {
+            document.getElementById(x).src = blankimg
+        }
+
+
+        document.addEventListener("keypress", (event) => {
+            clicksquare(event.key)
+
+            // handle keypress
+        });
+    }
+</script>
+
+</html>
